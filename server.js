@@ -9,7 +9,7 @@ var infoStream = fs.createWriteStream("logs/info.txt");
 app.use(cors());
 app.options('*', cors());
 app.get('/tasks', cors (), function (req, res, next) {
-	var number = req.query.number;
+	var number = req.query.number || 3;
 	var result = axios.get('https://lorem-faker.vercel.app/api?quantity='+number)
 	  .then(response => {
 	    var data = [];
@@ -32,6 +32,6 @@ app.post('/tasks',express.json({type: 'application/json'}), function(request, re
     response.send({value:'this is an update '+task.id});
 });
 
-app.listen(3000, () => {
- console.log("Server running on port 3000");
+app.listen(3001, () => {
+ console.log("Server running on port 3001np");
 });
