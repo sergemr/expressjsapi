@@ -26,10 +26,13 @@ app.get('/tasks', cors (), function (req, res, next) {
  
 })
 
-app.post('/tasks',express.json({type: 'application/json'}), function(request, response) {
+//Log File Entry
+//Log Location /logs/info.txt
+app.put('/tasks',express.json({type: 'application/json'}), function(request, response) {
 	var task = request.body;
-	infoStream.write("id: "+task.id+" title: "+task.title);
+	infoStream.write("id: "+task.id+" title: "+task.title+"\n");
     response.send({value:'this is an update '+task.id});
+	console.log("id: "+task.id+" title: "+task.title);
 });
 
 app.listen(3001, () => {
