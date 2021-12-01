@@ -22,12 +22,7 @@ app.get('/tasks', cors (), function (req, res, next) {
 			  }
 			  dataArr.push(tempObj);
 		  })
-	    // var data = [];
-		// var objectKeysArray = Object.keys(response.data)
-		// objectKeysArray.forEach(function(objKey) {
-		// 	var objValue = response.data[objKey];
-		// 	data.push({title:objValue,id:uuidv4()});
-		// });
+	 
 		return res.json(dataArr);
 	  })
 	  .catch(error => {
