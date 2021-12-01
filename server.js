@@ -4,6 +4,7 @@ const axios = require('axios');
 const { v4: uuidv4 } = require('uuid');
 const fs = require("fs");
 var cors = require('cors');
+const { title } = require("process");
 var Logger = (exports.Logger = {});
 var infoStream = fs.createWriteStream("logs/info.txt");
 app.use(cors());
@@ -12,13 +13,22 @@ app.get('/tasks', cors (), function (req, res, next) {
 	var number = req.query.number || 3;
 	var result = axios.get('https://lorem-faker.vercel.app/api?quantity='+number)
 	  .then(response => {
-	    var data = [];
-		var objectKeysArray = Object.keys(response.data)
-		objectKeysArray.forEach(function(objKey) {
-			var objValue = response.data[objKey];
-			data.push({title:objValue,id:uuidv4()});
-		});
-		res.json(data);
+		  console.log(response);
+		  let dataArr = [];
+		  response.data.map(title => {
+			  let tempObj = {
+				  UUiD: uuidv4(),
+				  Title: title
+			  }
+			  dataArr.push(tempObj);
+		  })
+	    // var data = [];
+		// var objectKeysArray = Object.keys(response.data)
+		// objectKeysArray.forEach(function(objKey) {
+		// 	var objValue = response.data[objKey];
+		// 	data.push({title:objValue,id:uuidv4()});
+		// });
+		return res.json(dataArr);
 	  })
 	  .catch(error => {
 		console.log(error);
